@@ -1,0 +1,923 @@
+data2 =[{
+    "method": "put",
+    "path": "/account",
+    "handler": "handlers/account/add.js",
+    "validate": [{
+        "param": "username",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }, {
+        "param": "password",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString", {
+                "name": "len",
+                "params": [6, 10]
+            }
+        ]
+    }, {
+        "param": "questionID",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }, {
+        "param": "answer",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "get",
+    "path": "/account/questions",
+    "handler": "handlers/account/questions.js"
+}, {
+    "method": "put",
+    "path": "/account/password",
+    "handler": "handlers/account/updatePassword.js",
+    "validate": [{
+        "param": "old",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString", {
+                "name": "len",
+                "params": [6, 10]
+            }
+        ]
+    }, {
+        "param": "new",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString", {
+                "name": "len",
+                "params": [6, 10]
+            }
+        ]
+    }]
+}, {
+    "method": "put",
+    "path": "/account/session",
+    "handler": "handlers/account/session.js"
+}, {
+    "method": "post",
+    "path": "/account/logout",
+    "handler": "handlers/account/logout.js"
+},{
+    "method": "get",
+    "path": "/account/question",
+    "handler": "handlers/account/detailQuestion.js"
+}, {
+    "method": "post",
+    "path": "/account/password/reset",
+    "handler": "handlers/account/resetPassword.js",
+    "validate": [{
+        "param": "username",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }, {
+        "param": "questionID",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    },{
+        "param": "answer",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }, {
+        "param": "password",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "post",
+    "path": "/account/login",
+    "handler": "handlers/account/login.js",
+    "validate": [{
+        "param": "username",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }, {
+        "param": "password",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString", {
+                "name": "len",
+                "params": [6, 10]
+            }
+        ]
+    }]
+}, {
+    "method": "post",
+    "path": "/account/question/answer",
+    "handler": "handlers/account/verifyAnswer.js",
+    "validate": [{
+        "param": "username",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }, {
+        "param": "answer",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "get",
+    "path": "/account/configs",
+    "handler": "handlers/account/getConfigs.js"
+}, {
+    "method": "post",
+    "path": "/account/configs",
+    "handler": "handlers/account/setConfigs.js"
+}, {
+    "method": "post",
+    "path": "/account/login/lg",
+    "handler": "handlers/account/lgAccountInfo.js",
+    "validate": [{
+        "param": "sid",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "get",
+    "path": "/applications",
+    "handler": "handlers/application/list.js"
+}, {
+    "method": "get",
+    "path": "/application/:appId",
+    "handler": "handlers/application/detail.js",
+    "validate": [{
+        "param": "appId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "get",
+    "path": "/application/:appId/fields",
+    "handler": "handlers/application/getFields.js",
+    "validate": [{
+        "param": "appId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+},{
+    "method": "get",
+    "path": "/configuration/:configId/fields",
+    "handler": "handlers/configuration/getFields.js",
+    "validate": [{
+        "param": "configId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "post",
+    "path": "/applications/installation",
+    "handler": "handlers/application/installation.js",
+    "validate": [{
+        "param": "installApps",
+        "type": "body",
+        "validators": [
+            "optional",
+            "isArray"
+        ]
+    },{
+        "param": "uninstallApps",
+        "type": "body",
+        "validators": [
+            "optional",
+            "isArray"
+        ]
+    }]
+}, {
+    "method": "get",
+    "path": "/cmsserver/info",
+    "handler": "handlers/upnp/info.js"
+}, {
+    "method": "get",
+    "path": "/application/:appId/configurations",
+    "handler": "handlers/application/configuration/list.js",
+    "validate": [{
+        "param": "appId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "get",
+    "path": "/application/:appId/configuration/newName",
+    "handler": "handlers/application/configuration/newName.js",
+    "validate": [{
+        "param": "appId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "get",
+    "path": "/configurations",
+    "handler": "handlers/configuration/list.js"
+}, {
+    "method": "post",
+    "path": "/application/:appId/configuration",
+    "handler": "handlers/application/configuration/add.js",
+    "validate": [{
+        "param": "appId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }, {
+        "param": "fields",
+        "type": "body",
+        "validators": [
+            "isObject", {
+                "name": "contains",
+                "params": ["fields"]
+            }, {
+                "name": "contains",
+                "params": ["name"]
+            }
+        ]
+    }, {
+        "param": "files",
+        "type": "body",
+        "validators": [
+            "isObject"
+        ]
+    }]
+}, {
+    "method": "get",
+    "path": "/configuration/:configId",
+    "handler": "handlers/configuration/detail.js",
+    "validate": [{
+        "param": "configId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "patch",
+    "path": "/configuration/:configId",
+    "handler": "handlers/configuration/update.js",
+    "validate": [{
+        "param": "configId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }, {
+        "param": "fields",
+        "type": "body",
+        "validators": [
+            "isObject", {
+                "name": "contains",
+                "params": ["fields"]
+            }, {
+                "name": "contains",
+                "params": ["name"]
+            }
+        ]
+    }, {
+        "param": "files",
+        "type": "body",
+        "validators": [
+            "isObject"
+        ]
+    }]
+}, {
+    "method": "delete",
+    "path": "/configuration/:configId",
+    "handler": "handlers/configuration/remove.js",
+    "validate": [{
+        "param": "configId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "post",
+    "path": "/download",
+    "handler": "handlers/download/content.js",
+    "validate": [{
+        "param": "schedules",
+        "type": "body",
+        "validators": [
+            "isArray", {
+                "name": "len",
+                "params": [1, 100]
+            }
+        ]
+    }, {
+        "param": "apps",
+        "type": "body",
+        "validators": [
+            "optional",
+            "isArray"
+        ]
+    }, {
+        "param": "media",
+        "type": "body",
+        "validators": [
+            "optional",
+            "isArray"
+        ]
+    }]
+}, {
+    "method": "get",
+    "path": "/dashboard/info",
+    "handler": "handlers/dashboard/info.js"
+}, {
+    "method": "get",
+    "path": "/inner/displays",
+    "handler": "handlers/inner/display/list.js"
+}, {
+    "method": "get",
+    "path": "/inner/display/:displayId",
+    "handler": "handlers/inner/display/detail.js",
+    "validate": [{
+        "param": "displayId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+},{
+    "method": "patch",
+    "path": "/inner/display/:displayId",
+    "handler": "handlers/inner/display/update.js",
+    "validate": [{
+        "param": "displayId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }, {
+        "param": "display",
+        "type": "body",
+        "validators": [
+            "isObject"
+        ]
+    }]
+}, {
+    "method": "patch",
+    "path": "/inner/display/activate",
+    "handler": "handlers/inner/display/activate.js",
+    "validate": [{
+        "param": "display",
+        "type": "body",
+        "validators": [
+            "isObject"
+        ]
+    }]
+}, {
+    "method": "put",
+    "path": "/inner/displays",
+    "handler": "handlers/inner/display/add.js",
+    "validate": [{
+        "param": "displays",
+        "type": "body",
+        "validators": [
+            "isArray", {
+                "name": "len",
+                "params": [1, 100]
+            }
+        ]
+    }]
+}, {
+    "method": "delete",
+    "path": "/inner/display/:displayId",
+    "handler": "handlers/inner/display/remove.js",
+    "validate": [{
+        "param": "displayId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "post",
+    "path": "/inner/display/discover",
+    "handler": "handlers/inner/display/discover.js",
+    "validate": [{
+        "param": "displayId",
+        "type": "body",
+        "validators": [
+            "isString",
+            "notEmpty"
+        ]
+    }]
+}, {
+    "method": "get",
+    "path": "/inner/displays/inactive/:displayScrId",
+    "handler": "handlers/inner/display/getInactive.js",
+    "validate": [{
+        "param": "displayScrId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "delete",
+    "path": "/inner/display/:displayId/schedule",
+    "handler": "handlers/inner/display/schedule/remove.js",
+    "validate": [{
+        "param": "displayId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "post",
+    "path": "/inner/display/:displayId/schedule",
+    "handler": "handlers/inner/display/schedule/upsert.js",
+    "validate": [{
+        "param": "displayId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }, {
+        "param": "adoptSmart",
+        "type": "body",
+        "validators": [
+            "notEmpty"
+        ]
+    }, {
+        "param": "schedules",
+        "type": "body",
+        "validators": [
+            "notEmpty"
+        ]
+    }]
+}, {
+    "method": "put",
+    "path": "/inner/application",
+    "handler": "handlers/inner/application/add.js",
+    "validate": [{
+        "param": "appInfo",
+        "type": "body",
+        "validators": [
+            "isObject"
+        ]
+    }]
+}, {
+    "method": "delete",
+    "path": "/inner/application",
+    "handler": "handlers/inner/application/remove.js"
+}, {
+    "method": "get",
+    "path": "/schedules",
+    "handler": "handlers/schedule/list.js"
+}, {
+    "method": "get",
+    "path": "/schedules/newName",
+    "handler": "handlers/schedule/newName.js"
+}, {
+    "method": "put",
+    "path": "/schedule",
+    "handler": "handlers/schedule/add.js",
+    "validate": [{
+        "param": "name",
+        "type": "body",
+        "validators": [
+            "isString",
+            "notEmpty"
+        ]
+    }, {
+        "param": "type",
+        "type": "body",
+        "validators": [
+            "isString",
+            "notEmpty"
+        ]
+    }, {
+        "param": "subSchedules",
+        "type": "body",
+        "validators": [
+            "isArray"
+        ]
+    }]
+}, {
+    "method": "get",
+    "path": "/schedule/:scheduleId",
+    "handler": "handlers/schedule/detail.js",
+    "validate": [{
+        "param": "scheduleId",
+        "type": "path",
+        "validators": [
+            "isString",
+            "notEmpty"
+        ]
+    }]
+}, {
+    "method": "delete",
+    "path": "/schedule/:scheduleId",
+    "handler": "handlers/schedule/remove.js",
+    "validate": [{
+        "param": "scheduleId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "patch",
+    "path": "/schedule/:scheduleId",
+    "handler": "handlers/schedule/update.js",
+    "validate": [{
+        "param": "scheduleId",
+        "type": "path",
+        "validators": [
+            "isString",
+            "notEmpty"
+        ]
+    }, {
+        "param": "name",
+        "type": "body",
+        "validators": [
+            "isString",
+            "notEmpty"
+        ]
+    }, {
+        "param": "type",
+        "type": "body",
+        "validators": [
+            "isString",
+            "notEmpty"
+        ]
+    }, {
+        "param": "subSchedules",
+        "type": "body",
+        "validators": [
+            "isArray"
+        ]
+    }]
+}, {
+    "method": "post",
+    "path": "/settings/backup",
+    "handler": "handlers/setting/backup.js"
+}, {
+    "method": "post",
+    "path": "/settings/restore",
+    "handler": "handlers/setting/restore.js"
+}, {
+    "method": "get",
+    "path": "/displays",
+    "handler": "handlers/display/list.js"
+}, {
+    "method": "get",
+    "path": "/displays/group",
+    "handler": "handlers/display/group/list.js"
+}, {
+    "method": "get",
+    "path": "/display/:displayId",
+    "handler": "handlers/display/detail.js",
+    "validate": [{
+        "param": "displayId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "get",
+    "path": "/displays/group/:groupID",
+    "handler": "handlers/display/group/detail.js",
+    "validate": [{
+        "param": "groupID",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "patch",
+    "path": "/display/:displayId",
+    "handler": "handlers/display/update.js",
+    "validate": [{
+        "param": "displayId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }, {
+        "param": "name",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "patch",
+    "path": "/displays/group/:groupID",
+    "handler": "handlers/display/group/update.js",
+    "validate": [{
+        "param": "groupID",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }, {
+        "param": "groupName",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }, {
+        "param": "displays",
+        "type": "body",
+        "validators": [
+            "isArray", {
+                "name": "len",
+                "params": [1, 100]
+            }
+        ]
+    }, {
+        "param": "groups",
+        "type": "body",
+        "validators": [
+            "isArray", {
+                "name": "len",
+                "params": [1, 100]
+            }
+        ]
+    }
+    ]
+}, {
+    "method": "put",
+    "path": "/displays",
+    "handler": "handlers/display/add.js",
+    "validate": [{
+        "param": "displays",
+        "type": "body",
+        "validators": [
+            "isArray", {
+                "name": "len",
+                "params": [1, 100]
+            }
+        ]
+    }]
+}, {
+    "method": "put",
+    "path": "/displays/group",
+    "handler": "handlers/display/group/add.js",
+    "validate": [{
+        "param": "groupName",
+        "type": "body",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }, {
+        "param": "displays",
+        "type": "body",
+        "validators": [
+            "isArray", {
+                "name": "len",
+                "params": [1, 100]
+            }
+        ]
+    }, {
+        "param": "groups",
+        "type": "body",
+        "validators": [
+            "isArray", {
+                "name": "len",
+                "params": [1, 100]
+            }
+        ]
+    }
+    ]
+}, {
+    "method": "delete",
+    "path": "/display/:displayId",
+    "handler": "handlers/display/remove.js",
+    "validate": [{
+        "param": "displayId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "post",
+    "path": "/display/:displayId/control",
+    "handler": "handlers/display/control.js",
+    "validate": [{
+        "param": "displayId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }, {
+        "param": "action",
+        "type": "body",
+        "validators": [{
+            "name": "inArray",
+            "params": [
+                ["reboot", "turnOff", "turnOn", "reset"]
+            ]
+        }]
+    }
+    ]
+}, {
+    "method": "post",
+    "path": "/display/:displayId/deploy",
+    "handler": "handlers/display/deploy.js",
+    "validate": [{
+        "param": "displayId",
+        "type": "path",
+        "validators": [
+            "isString",
+            "notEmpty"
+        ]
+    }, {
+        "param": "schedule",
+        "type": "body",
+        "validators": [
+            "optional",
+            "isString",
+            "notEmpty"
+        ]
+    }, {
+        "param": "smartSchedule",
+        "type": "body",
+        "validators": [
+            "optional",
+            "isString",
+            "notEmpty"
+        ]
+    }
+    ]
+}, {
+    "method": "post",
+    "path": "/display/:displayId/tagEvent",
+    "handler": "handlers/display/tagEvent.js",
+    "validate": [{
+        "param": "displayId",
+        "type": "path",
+        "validators": [
+            "isString",
+            "notEmpty"
+        ]
+    }, {
+        "param": "tagName",
+        "type": "body",
+        "validators": [
+            "isString",
+            "notEmpty"
+        ]
+    }
+    ]
+}, {
+    "method": "get",
+    "path": "/display/:displayId/screenshot",
+    "handler": "handlers/display/screenshot.js",
+    "validate": [{
+        "param": "displayId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "post",
+    "path": "/display/:displayId/updateFirmware",
+    "handler": "handlers/display/updateFirmware.js",
+    "validate": [{
+        "param": "displayId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }, {
+        "param": "files",
+        "type": "body",
+        "validators": [
+            "isObject", {
+                "name": "contains",
+                "params": ["fileToUpload"]
+            }
+        ]
+    }]
+},{
+    "method": "get",
+    "path": "/displays/inactive/:displayScrId",
+    "handler": "handlers/display/getInactive.js",
+    "validate": [{
+        "param": "displayScrId",
+        "type": "path",
+        "validators": [
+            "notEmpty",
+            "isString"
+        ]
+    }]
+}, {
+    "method": "post",
+    "path": "/applications/read",
+    "handler": "handlers/application/read.js"
+}, {
+    "method": "delete",
+    "path": "/application",
+    "handler": "handlers/application/remove.js"
+}, {
+    "method": "put",
+    "path": "/application",
+    "handler": "handlers/application/add.js",
+    "validate": [
+        {
+            "param": "appName",
+            "type": "body",
+            "validators": [
+                "notEmpty",
+                "isString"
+            ]
+        },
+        {
+            "param": "app",
+            "type": "body",
+            "validators": [
+                "notEmpty",
+                "isString"
+            ]
+        },
+        {
+            "param": "overwrite",
+            "type": "body",
+            "validators": [
+                "optional",
+                "isBoolean",
+                "notEmpty"
+            ]
+        }
+    ]
+}]
